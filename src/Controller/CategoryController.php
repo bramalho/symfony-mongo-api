@@ -37,11 +37,34 @@ class CategoryController extends AbstractController
      * )
      * @OA\Tag(name="categories")
      */
-    public function index()
+    public function getCategories()
     {
         return $this->json(
             $this->mapper->mapMultiple(
                 $this->documentManager->getRepository(Category::class)->findAll(),
+                CategoryResponse::class
+            )
+        );
+    }
+
+
+    /**
+     * @Route("/api/categories/{uid}", name="category", methods={"GET"})
+     * @OA\Response(
+     *     response=200,
+     *     description="Get Category by UID",
+     *     @OA\Schema(
+     *         type="object",
+     *         @OA\Property(ref=@Model(type=CategoryResponse::class))
+     *     )
+     * )
+     * @OA\Tag(name="categories")
+     */
+    public function getCategoryByUID(string $uid)
+    {
+        return $this->json(
+            $this->mapper->map(
+                $this->documentManager->getRepository(Category::class)->findOneBy(['uid' => $uid]),
                 CategoryResponse::class
             )
         );
