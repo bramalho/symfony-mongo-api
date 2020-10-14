@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Document\Category;
 use App\Document\Product;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,12 +36,32 @@ class TestCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title('Testing...');
 
+//        $categories = [];
+//        for ($i = 0; $i <= 1; $i++) {
+//            $category = new Category();
+//            $category->setUid(Uuid::uuid4()->toString());
+//            $category->setName('Category ' . $i);
+//            $this->documentManager->persist($category);
+//            $categories[] = $category;
+//        }
+//
+//        for ($i = 1; $i <= 10; $i++) {
+//            $product = new Product();
+//            $product->setUid(Uuid::uuid4()->toString());
+//            $product->setName('Product ' . $i);
+//            $product->setPrice(rand(100, 1000));
+//            $product->setCategory($categories[$i % 2 == 0 ? 0 : 1]);
+//            $this->documentManager->persist($product);
+//        }
+
+        $this->documentManager->flush();
+
         $io->writeln('Categories');
         $table = new Table($output);
         $table->setHeaders(['ID', 'UID', 'Name']);
         $categories = $this->documentManager->getRepository(Category::class)->findAll();
         foreach ($categories as $category) {
-            $table->addRow([$category->id, $category->uid, $category->name]);
+            $table->addRow([$category->getId(), $category->getUid(), $category->getName()]);
         }
         $table->render();
 
@@ -49,7 +70,13 @@ class TestCommand extends Command
         $table->setHeaders(['ID', 'UID', 'Name', 'Price', 'Category']);
         $products = $this->documentManager->getRepository(Product::class)->findAll();
         foreach ($products as $product) {
-            $table->addRow([$product->id, $product->uid, $product->name, $product->price, $product->category->name]);
+            $table->addRow([
+                $product->getId(),
+                $product->getUid(),
+                $product->getName(),
+                $product->getPrice(),
+                $product->getCategory()->getName()
+            ]);
         }
         $table->render();
 
