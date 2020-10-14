@@ -11,45 +11,66 @@ class Category
 {
     /**
      * @MongoDB\Id
+     * @var string
      */
     protected $id;
 
     /**
      * @MongoDB\Field(type="string")
+     * @var string
      */
     protected $uid;
 
     /**
      * @MongoDB\Field(type="string")
+     * @var string
      */
     protected $name;
 
-    public function getId()
+    /**
+     * @return string|null
+     */
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId($id): void
+    /**
+     * @param string $id
+     */
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
 
-    public function getUid()
+    /**
+     * @return string|null
+     */
+    public function getUid(): ?string
     {
         return $this->uid;
     }
 
-    public function setUid($uid): void
+    /**
+     * @param string $uid
+     */
+    public function setUid(string $uid): void
     {
         $this->uid = $uid;
     }
 
-    public function getName()
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName($name): void
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

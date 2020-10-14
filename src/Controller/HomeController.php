@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     {
         return $this->json([
             'message' => 'It works!',
-            'api' => '/api/v1',
+            'api' => '/api',
             'docs' => '/api/doc'
         ]);
     }
