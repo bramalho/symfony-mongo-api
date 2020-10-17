@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\API;
 
 use App\Response\ProductResponse;
 use AutoMapperPlus\AutoMapperInterface;
@@ -11,6 +11,9 @@ use OpenApi\Annotations as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use App\Document\Product;
 
+/**
+ * @Route("/api", name="api_")
+ */
 class ProductController extends AbstractController
 {
     /** @var DocumentManager */
@@ -26,7 +29,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/api/products", name="products", methods={"GET"})
+     * @Route("/products", name="products", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="List of Products",
@@ -48,7 +51,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/api/products/{uid}", name="product", methods={"GET"})
+     * @Route("/products/{uid}", name="product", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="Get Product by UID",

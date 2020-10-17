@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\API;
 
 use App\Document\Product;
 use App\Response\CategoryResponse;
@@ -13,6 +13,9 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use App\Document\Category;
 use App\Response\ProductResponse;
 
+/**
+ * @Route("/api", name="api_")
+ */
 class CategoryController extends AbstractController
 {
     /** @var DocumentManager */
@@ -28,7 +31,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/api/categories", name="categories", methods={"GET"})
+     * @Route("/categories", name="categories", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="List of Categories",
@@ -50,7 +53,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/api/categories/{uid}", name="category", methods={"GET"})
+     * @Route("/categories/{uid}", name="category", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="Get Category by UID",
@@ -72,7 +75,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/api/categories/{uid}/products", name="categoryProducts", methods={"GET"})
+     * @Route("/categories/{uid}/products", name="categoryProducts", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="Get Category Products by Category UID",
